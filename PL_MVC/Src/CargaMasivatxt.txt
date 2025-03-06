@@ -1,0 +1,2 @@
+Nombre|ApellidoPaterno|ApellidoMaterno|FechaNacimiento|Celular|UserName|Email|Password|Sexo|Telefono|CURP
+Miguel|Blanco|García|10/04/2000|5551234567|BlancoTapia|carlos.blancot@outlook.com|P@sword7|M|5559876543|BTLC850410HDFRRN08

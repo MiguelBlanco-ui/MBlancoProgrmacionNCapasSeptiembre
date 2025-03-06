@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Tabla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <h1>Tabla con jQuery</h1>
+        <hr />
+    </div>
+    <div>
+        <div class="p-3">
+            <button id="addRow" class="btn btn-outline-warning">Agregar Fila</button>
+        </div>
+        <table id="myTable" class="table table-hover table-bordered pt-5">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Eliminar</th>
+                    <th>Color</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nombre 1</td>
+                    <td>Apelldio 1</td>
+                    <td><button class="deleteRow btn btn-outline-warning">Eliminar</button></td>
+                    <td><button class="color btn ${color}" data-color="${color}">CambiarColor</button></td>
+                </tr>
+                <tr>
+                    <td>Nombre 2</td>
+                    <td>Apellido 2</td>
+                    <td><button class="deleteRow btn btn-outline-warning">Eliminar</button></td>
+                    <td><button class="color btn ${color}" data-color="${color}">CambiarColor</button></td>
+                </tr>
+                <tr>
+                    <td>Nombre 3</td>
+                    <td>Apelldio 3</td>
+                    <td><button class="deleteRow btn btn-outline-warning">Eliminar</button></td>
+                    <td><button class="color btn ${color}" data-color="${color}">CambiarColor</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.7.0.js"></script> @*incluir jqerry *@
+<script>
+    var themeColors = [
+        'bg-primary',
+        'bg-secondary',
+        'bg-success' ,
+        'bg-info' ,
+        'bg-warning' ,
+        'bg-danger' ,
+        'bg-light text-dark',
+        'bg-dark text-light'
+    ];
+
+    $(document).ready(function () {
+        let rowCount = 3;
+       
+        
+        $('#addRow').click(function () {
+            rowCount++;
+            var color = themeColors[Math.floor(Math.random() * themeColors.length)];
+
+            $('#myTable tbody').append(`
+      <tr>
+        <td>Nombre ${rowCount}</td>
+        <td>Apellido ${rowCount}</td>
+        <td><button class="deleteRow btn btn-outline-warning">Eliminar</button></td>
+        <td><button class="color btn ${color}" data-color="${color}">CambiarColor</button></td>
+      </tr>
+         `);
+        });
+
+        $('#myTable').on('click', '.color', function (event) {
+            event.stopPropagation();
+            var color = $(this).data('color');
+            $(this).closest('tr')
+            .addClass(color);
+        });
+
+        $('#myTable').on('click', '.deleteRow', function (event) {
+            event.stopPropagation();
+            $(this).closest('tr').remove();
+        });
+    });
+</script>
+
+

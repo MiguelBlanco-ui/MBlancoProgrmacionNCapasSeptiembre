@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "AddUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Registro</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>En este apartado se agregan usuarios</h3>
+                <hr />
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="mb-3 row">
+            <label for="Nombre" class="col-sm-2 col-form-label">Nombre</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Nombre">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="ApellidoPaterno" class="col-sm-2 col-form-label">Apellido Paterno</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ApellidoPaterno">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="ApellidoMaterno" class="col-sm-2 col-form-label">Apellido Materno</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ApellidoMaterno">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="FechaNacimineto" class="col-sm-2 col-form-label">Fecha de Nacimiento </label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="FechaNacimiento">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Celular" class="col-sm-2 col-form-label">Celular </label>
+            <div class="col-sm-10">
+                <input type="tel" class="form-control" id="Celular">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="UserName" class="col-sm-2 col-form-label">Nombre de Usuario </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="UserName">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Email" class="col-sm-2 col-form-label">Email </label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="Email">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Password" class="col-sm-2 col-form-label">Contraseña </label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="Password">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label  for="Sexo" class="col-sm-2 col-form-label" >Sexo</label>
+            <div class="col-sm-10">
+                 <select class="form-select" id="Sexo">
+                    <option selected>Opciones...</option>
+                    <option value="M">Masuculino</option>
+                    <option value="F">Femenino</option>
+                    <option value="O">Otro</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="Telefono" class="col-sm-2 col-form-label">Telefono</label>
+            <div class="col-sm-10">
+                <input type="tel" class="form-control" id="Telefono">
+            </div>
+        </div>
+
+    </div>
+</div>

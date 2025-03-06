@@ -1,0 +1,547 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "Formulario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @using (Html.BeginForm("Formulario", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="col-4">
+                @*@Html.LabelFor(model => model.IdUsuario)
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                                <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                            </svg>
+                        </span>
+                        @Html.TextBoxFor(model => model.IdUsuario, new { @class = "form-control", @placeholder = "IdUsuario" })
+                    </div>*@
+                @Html.Hidden("IdUsuario", Model.IdUsuario)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                @Html.LabelFor(model => model.Nombre)
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                        </svg>
+                    </span>
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Ejemplo : Miguel ", @onkeypress = "return SoloLetras(event, 'lblNombreError')" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @id = "lblNombreError", @class = "text-danger" })
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.ApellidoPaterno)
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                        </svg>
+                    </span>
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @placeholder = "Ejemplo : Blanco", @onkeypress = "return SoloLetras(event,'lblApellidoPaternoError')" })
+                </div>
+                @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @id = "lblApellidoPaternoError", @class = "text-danger" })
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.ApellidoMaterno)
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                        </svg>
+                    </span>
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @placeholder = "Ejemplo : Tapia ", @onkeypress = "return SoloLetras(event,'lblApellidoMaternoError')" })
+                </div>
+                @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @id = "lblApellidoMaternoError", @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                @Html.LabelFor(model => model.FechaNacimiento)
+                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @placeholder = " dd/mm/yyyy " })
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.Celular)
+                @Html.TextBoxFor(model => model.Celular, new { @class = "form-control", @placeholder = " ", @onkeypress = "return SoloNumeros(event,'lblCelularError')" })
+                @Html.ValidationMessageFor(model => model.Celular, "", new { @id = "lblCelularError", @class = "text-danger" })
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.UserName)
+                @Html.TextBoxFor(model => model.UserName, new { @id = "txtUserName", @class = "form-control", @placeholder = "Nombre Usuario", @onblur = "LetrasNumerosCaracteres('txtUserName','lblUserNameError')" })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @id = "lblUserNameError", @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @id = "txtCorreo", @class = "form-control", @placeholder = "Ejemplo: ejemplo@correo.com ", @onpaste = "return false;", @oncopy = "return false;", @onblur = "ValidarCorreo('txtCorreo','lblEmailError')" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @id = "lblEmailError", @class = "text-danger" })
+            </div>
+
+            <div class="col-4">
+                @Html.LabelFor(model => model.ValidarEmail, "Confirmar Correo")
+                @Html.TextBoxFor(model => model.ValidarEmail, new { @id = "txtConfirmacionCorreo", @class = "form-control", @placeholder = "Ejemplo: ejemplo@correo.com ", @onpaste = "return false;", @oncopy = "return false;", @onblur = "ValidarCoincidenciaCorreo('lblEmailValidarError')" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @id = "lblEmailValidarError", @class = "text-danger" })
+            </div>
+
+            <div class="col-4">
+                @Html.LabelFor(model => model.Password)
+                @Html.TextBoxFor(model => model.Password, new { @id = "txtPassword", @class = "form-control", @placeholder = "Contraseña ", @type = "password", @Shortcuts = "disabled", @onpaste = "return false;", @oncopy = "return false;", @onblur = "SoloPassword('lblPasswordError')" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @id = "lblPasswordError", @class = "text-danger" })
+            </div>
+
+            <div class="col-4">
+                @Html.LabelFor(model => model.ValidarPassword, "Confirmar contraseña")
+                @Html.TextBoxFor(model => model.ValidarPassword, new { @id = "txtConfirmacionPassword", @class = "form-control", @placeholder = "Contraseña ", @type = "password", @Shortcuts = "disabled", @onpaste = "return false;", @oncopy = "return false;", @onblur = "ValidarCoincidenciaPassword('lblValidarPasswordError')" })
+                @Html.ValidationMessageFor(model => model.ValidarPassword, "", new { @id = "lblValidarPasswordError", @class = "text-danger" })
+            </div>
+
+            <div class="col-4">
+                @Html.LabelFor(model => model.Sexo)
+                @Html.TextBoxFor(model => model.Sexo, new { @class = "form-control", @placeholder = "M para Masculido y F para Femenino " })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                @Html.LabelFor(model => model.Telefono)
+                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @placeholder = "Telefono de casa", @onkeypress = "return SoloNumeros(event,'lblTelefonoError')" })
+                @Html.ValidationMessageFor(model => model.Telefono, "", new { @id = "lblTelefonoError", @class = "text-danger" })
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.CURP)
+                @Html.TextBoxFor(model => model.CURP, new { @id = "txtCURP", @class = "form-control", @placeholder = "CURP", @onblur = "ValidarCURP('txtCURP','lblCURPError')" })
+                @Html.ValidationMessageFor(model => model.CURP, "", new { @id = "lblCURPError", @class = "text-danger" })
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.Rol.IdRol)
+                @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Selecciona un rol", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Rol.IdRol, "", new { @id = "lblRolError", @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                @*@Html.Hidden("IdDireccion", Model.Direccion.IdDireccion)*@
+                @Html.LabelFor(model => model.Direccion.IdDireccion)
+                @Html.TextBoxFor(model => model.Direccion.IdDireccion, new { @class = "form-control", @placeholder = "Id" })
+
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.Direccion.Calle)
+                @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control", @placeholder = "Calle" })
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.Direccion.NumeroExterior)
+                @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control", @placeholder = "Numero Exterior" })
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.Direccion.NumeroInterior)
+                @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control", @placeholder = "Numero Exterior" })
+            </div>
+        </div>
+
+        <div class="col-3 mt-3">
+            <div class="form-group">
+                @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais,
+                  new SelectList(Model.Direccion.Colonia.Municipio.Estado.Pais.Paises, "IdPais", "Nombre"),
+                  "Selecciona una Pais",
+                  new { id = "ddlIdPais", @class = "form-control", @onchange = "FillEstado()" })
+            </div>
+            <div class="form-group mt-4">
+
+                @if (Model.Direccion.Colonia.Municipio.Estado.Estados == null)
+                {
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado,
+                      new SelectList(string.Empty, "IdEstado", "Nombre"),
+                      "Selecciona un Estado",
+                      new { id = "ddlIdEstado", @class = "form-control", @onchange = "FillMunicipio()" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado,
+                     new SelectList(Model.Direccion.Colonia.Municipio.Estado.Estados, "IdEstado", "Nombre", Model.Direccion.Colonia.Municipio.Estado.IdEstado),
+                     "Selecciona un Estado",
+                     new { id = "ddlIdEstado", @class = "form-control", @onchange = "FillMunicipio()" })
+
+                }
+            </div>
+            <div class="form-group mt-4">
+                @*grupo/ margen top*@
+
+                @if (Model.Direccion.Colonia.Municipio.Municipios == null)
+                {
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio,
+                      new SelectList(string.Empty, "IdMunicipio", "Nombre"),
+                      "Selecciona un Municpio",
+                      new { id = "ddlIdMunicipio", @class = "form-control", @onchange = "FillColonia()" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio,
+                    new SelectList(Model.Direccion.Colonia.Municipio.Municipios, "IdMunicipio", "Nombre", Model.Direccion.Colonia.Municipio.IdMunicipio),
+                     "Selecciona un Municipio",
+                     new { id = "ddlIdMunicipio", @class = "form-control", @onchange = "FillColonia()" })
+                }
+
+            </div>
+            <div class="form-group mt-4">
+
+                @if (Model.Direccion.Colonia.Colonias == null)
+                {
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia,
+                      new SelectList(string.Empty, "IdColonia", "Nombre"),
+                      "Selecciona una colonia",
+                      new { id = "ddlIdColonia", @class = "form-control" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia,
+                    new SelectList(Model.Direccion.Colonia.Colonias, "IdColonia", "Nombre", Model.Direccion.Colonia.IdColonia),
+                     "Selecciona una colonia",
+                     new { id = "ddlIdColonia", @class = "form-control" })
+                }
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 mt-4">
+                @if (Model.Imagen == null)
+                {
+                    <img id="imgUsuario" src="~/Img/Default.png" height="200px" width="200px" />
+                }
+                else
+                {
+                    //Mostar imagen usuarioooo
+                    <img id="imgUsuario" src="data:image/png;base64,@Convert.ToBase64String(Model.Imagen)" height="100px" width="100px" />
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 mt-4">
+                <input id="inputUsuario" name="inputUsuario" type="file" accept=".jpg,.png,.jpeg">
+            </div>
+        </div>
+
+
+
+        <div class=" row pt-4">
+            <div class="col-1">
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+            <div class="col-1">
+                @Html.ActionLink("Cancelar", "GetAll", "Usuario", new { @class = "btn btn-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => Model.Imagen)
+    }
+</div>
+
+@*<div class="col-xl-12" style="margin-top:40px;">
+        @foreach (var modeleState in ViewData.ModelState.Values)
+        {
+            foreach (var error in modeleState.Errors)
+            {
+                <h5 style="color:red;margin-top:8px;">@error.ErrorMessage</h5>
+            }
+        }
+    </div>*@
+
+<script>
+    function init() {
+        var inputFile = document.getElementById('inputUsuario');
+        inputFile.addEventListener('change', mostrarImagen, false);
+    }
+    function mostrarImagen(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var img = document.getElementById('imgUsuario');
+            img.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+    window.addEventListener('load', init, false);
+
+     function FillEstado(){
+     var ddlIdPais = $("#ddlIdPais").val();
+
+      $("#ddlIdEstado").empty();
+
+      $.ajax({
+              type: 'GET',
+              url: '@Url.Action("GetEstadoByIdPais")',
+              dataType: 'json',
+              data: { IdPais: ddlIdPais },
+              success: function (result)
+              {
+                  $("#ddlIdEstado").append('<option value ="0">' + 'Seleccione un Estado' + '</option>');
+                  $.each(result.Objects, function (i, Estados)
+                  {
+                      $("#ddlIdEstado").append('<option value ="'
+                                                      + Estados.IdEstado + '">'
+                                                      + Estados.Nombre + '</option>');
+
+                  });
+              },
+
+              error: function (ex)
+              {
+                  alert('failed.'+ ex);
+              }
+      });
+
+    }
+    function FillMunicipio(){
+    var ddlIdEstado = $("#ddlIdEstado").val();
+    $("#ddlIdMunicipio").empty();
+
+        $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetMunicipioByIdEstado")',
+                dataType: 'json',
+                data: { IdEstado: ddlIdEstado },
+                success: function (result)
+                {
+                    $("#ddlIdMunicipio").append('<option value ="0">' + 'Seleccione un Municipio' + '</option>');
+                    $.each(result.Objects, function (i, Municipios)
+                    {
+                        $("#ddlIdMunicipio").append('<option value ="'
+                                                        + Municipios.IdMunicipio + '">'
+                                                        + Municipios.Nombre + '</option>');
+
+                    });
+                },
+
+                error: function (ex)
+                {
+                    alert('failed.'+ ex);
+                }
+        });
+
+    }
+    function FillColonia() {
+   var ddlIdMunicipio = $("#ddlIdMunicipio").val();
+
+    $("#ddlIdColonia").empty();
+
+    $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetColoniaByIdMunicipio")',
+            dataType: 'json',
+            data: { IdMunicipio: ddlIdMunicipio },
+            success: function (result)
+            {
+                $("#ddlIdColonia").append('<option value ="0">' + 'Seleccione una Colonia' + '</option>');
+                $.each(result.Objects, function (i, Colonias)
+                {
+                    $("#ddlIdColonia").append('<option value ="'
+                                                    + Colonias.IdColonia + '">'
+                                                    + Colonias.Nombre + '</option>');
+
+                });
+            },
+
+            error: function (ex)
+            {
+                alert('failed.'+ ex);
+            }
+    });
+
+    }
+
+
+
+
+    function SoloLetras(event, idLabelError) {
+        let teclaPresionada = event.key;
+        let regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]$/;
+        if (regex.test(teclaPresionada) /*|| teclaPresionada === "Backspace"*/) { //Si no consideras teclas como Backspace, el usuario no podrá borrar texto.
+            $("#" + idLabelError).hide();
+            return true; // permite escribir
+        } else {
+            $("#" + idLabelError).show();
+            $("#" + idLabelError).text('Solo se permiten letras');
+            return false; // bloquea la entrada de testo
+        }
+    }
+    function SoloNumeros(event, idLabelError) {
+        let teclaPresionada = event.key;
+        let regex = /^[0-9]*$/; //se evalua solo el valor de la tecla
+        if (regex.test(teclaPresionada) /*&& inputValue.length <= 12*/) { //Si no consideras teclas como Backspace, el usuario no podrá borrar texto.
+            $("#" + idLabelError).hide();
+            return true; // permite escribir
+        } else {
+            $("#" + idLabelError).show();
+            $("#" + idLabelError).text('Solo se permiten numeros');
+            return false; // bloquea la entrada de texto
+        }
+
+    }
+    function LetrasNumerosCaracteres(IdInput, idLabelError) {
+        let username = $("#"+IdInput).val();
+        let regex = /^[a-zA-Z0-9_.]+$/; //solo caracteres de _.
+        if (regex.test(username)) { //Si no consideras teclas como Backspace, el usuario no podrá borrar texto.
+            $("#" + idLabelError).hide();
+
+        } else {
+            $("#" + idLabelError).show();
+            $("#" + idLabelError).text('Solo se permiten letras, numeros y caracteres - _ .');
+
+        }
+    }
+
+    function ValidarCURP(IdInput, idLabelError) {
+        let curp = $("#" + IdInput).val();
+        let regex = /[A-Z]{4}[0-9]{6}[HM]{1}[A-Z]{2}[BCDFGHJKLMNPQRSTVWXYZ]{3}([A-Z]{2})?([0-9]{2})?/;
+        if (regex.test(curp)) {
+            $("#" + idLabelError).hide();
+        } else {
+            $("#" + idLabelError).show();
+            $("#" + idLabelError).text('El CURP es incorrecto');
+
+        }
+    }
+
+    function ValidarCorreo(IdInput, idLabelError) {
+        let email = $("#" + IdInput).val();
+        let regex = /^[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (regex.test(email)) {
+            $("#" + idLabelError).hide();
+            $("#" + IdInput).css("border", "2px solid green");
+        } else {
+            $("#" + idLabelError).show();
+            $("#" + idLabelError).text('El correo no es valido');
+            $("#" + IdInput).css("border", "2px solid red");
+
+        }
+    }
+    function ValidarCoincidenciaCorreo(idLabelError) {
+        let email = $("#txtCorreo").val();
+        let emailConfirmacion = $("#txtConfirmacionCorreo").val();
+
+        if (email == emailConfirmacion) {
+            $("#" + idLabelError).hide();
+            $("#txtConfirmacionCorreo").css("border", "2px solid green");
+        } else {
+            $("#" + idLabelError).show();
+            $("#" + idLabelError).text('Los correos no coinciden');
+            $("#txtConfirmacionCorreo").css("border", "2px solid red");
+
+
+        }
+    }
+
+    function SoloPassword(idLabelError) {
+        let password = $("#txtPassword").val();
+        let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$/;
+        if (regex.test(password)) {
+            $("#" + idLabelError).hide();
+            $("#txtPassword").css("border", "2px solid green");
+        } else {
+            $("#" + idLabelError).show();
+            $("#" + idLabelError).text('LA contraseña no es valida, debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una letra minúscula, un número y un carácter especial (@@, $, !, %, , ?, &). ');
+            $("#txtPassword").css("border", "2px solid red");
+
+        }
+    }
+
+    function ValidarCoincidenciaPassword(idLabelError) {
+        let password = $("#txtPassword").val();
+        let passwordConfirmacion = $("#txtConfirmacionPassword").val();
+        if (password == passwordConfirmacion) {
+
+            $("#" + idLabelError).hide();
+            $("#txtConfirmacionPassword").css("border", "2px solid green");
+
+
+        } else {
+            $("#" + idLabelError).show();
+            $("#" + idLabelError).text('La contraseña no coincide');
+            $("#txtConfirmacionPassword").css("border", "2px solid red");
+
+
+        }
+    }
+</script>
+
+
+@*<script>
+        function validar() {
+            let archivo = document.getElementById('imgUsuario').value,
+                extension = archivo.substring(archivo.lastIndexOf('.'), archivo.length);
+            if (document.getElementById('imgUsuario').getAttribute('accept').split(',').indexOf(extension) < 0) {
+                alert('Archivo inválido. No se permite la extensión ' + extension);
+            }
+        }
+    </script>*@
+
+@*<script>
+        window.onload = function () {
+            var form = document.getElementById('inputUsuario'),
+                imagenInput = document.getElementById('imgUsuario');
+            form.onsubmit = function () {
+                var isValid = /\.jpe?g$/i.test(imagenInput.value);
+                if (!isValid) {
+                    alert('Solo se permiten archivos .jpg')
+                }
+            }
+        }
+    </script>*@
+
+
+
+
+@*<div class="container">
+    @using (Html.BeginForm("Formulario", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="col-12">
+                @Html.Hidden("IdUsuario", Model.IdUsuario)
+            </div>
+            <div class="col-12">
+                @Html.LabelFor(model => model.Direccion.NumeroExterior)
+                @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control", @placeholder = "Numero Exterior" })
+            </div>
+            <div>
+                <button class="btn btn-outline-secondary"></button>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <div class="col-12 table-responsive">
+        @if (Model.Usuarios != null) //Si trajo usuarios
+        {
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Usuario usuario in Model.Usuarios)
+                    {
+                        <tr>
+                            <td>
+
+                                <a class="btn btn-outline-success" href="@Url.Action("Formulario","Usuario", new {IdUsuario = usuario.IdUsuario })">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                    </svg>
+                                </a>
+                            </td>
+                            <td>@usuario.IdUsuario</td>
+                            <td>@usuario.Nombre @usuario.ApellidoPaterno @usuario.ApellidoMaterno</td>
+                            <td>@usuario.FechaNacimiento</td>*@

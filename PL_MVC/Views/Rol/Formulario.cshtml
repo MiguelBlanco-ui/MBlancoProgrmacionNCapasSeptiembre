@@ -1,0 +1,66 @@
+﻿
+@model ML.Rol
+@{
+    ViewBag.Title = "Formulario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @using (Html.BeginForm("Formulario", "Rol", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-4">
+                @Html.LabelFor(model => model.IdRol)
+                @Html.TextBoxFor(model => model.IdRol, new { @class = "form-control", @placeholder = " " })
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.Nombre)
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                        </svg>
+                    </span>
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre del rol" })
+                </div>
+
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @id = "lblNombreError", @class = "text-danger" })
+
+            </div>
+            <div class="col-4">
+                @Html.LabelFor(model => model.FechaRegistro)
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                        </svg>
+                    </span>
+                    @Html.TextBoxFor(model => model.FechaRegistro, new { @class = "form-control", @placeholder = "Fecha del registro: " })
+                </div>
+                @Html.ValidationMessageFor(model => model.FechaRegistro, "", new { @id = "lblNombreError", @class = "text-danger" })
+            </div>
+
+            @*<div class="col-xl-12" style="margin-top:40px;">
+                @foreach (var modeleState in ViewData.ModelState.Values)
+                {
+                    foreach (var error in modeleState.Errors)
+                    {
+                        <h5 style="color:red;margin-top:2px;">@error.ErrorMessage</h5>
+                    }
+                }
+            </div>*@
+
+            <div class=" row pt-3">
+                <div class="col-1">
+                    <button type="submit" class="btn btn-outline-success">Guardar</button>
+                </div>
+                <div class="col-1">
+                    @Html.ActionLink("Cancelar", "GetAll", "Rol", new { @class = "btn btn-outline-danger" })
+                </div>
+            </div>
+
+        </div>
+        }
+</div>
+@*Mostrar los errores*@
+

@@ -1,0 +1,398 @@
+﻿
+@model ML.Usuario
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-12">
+            <h2>Usuario</h2>
+            <hr />
+        </div>
+    </div>
+    @*// Empieza forms*@
+
+    <div class="row">
+        <div class=" d-flex p-3">
+            <button id="showCargaMasiva" class="btn btn-outline-warning flex-fill"> Carga Masiva </button>
+
+
+            <button id="showBusquedaAbierta" class="btn btn-outline-success flex-fill"> Busqueda Abierta </button>
+        </div>
+    </div>
+
+    <div id="viewGetAll">
+        @if (Session["RutaTXT"] == null && Session["RutaExcel"] == null)
+        {
+            <div class="row">
+                <div class="col-12 p-3">
+                    <h5> Seleccione + para agregar un Usuario</h5>
+
+                    <div class="col-2">
+                        <div>
+                            @*@Html.ActionLink(" + ", "Formulario", "Usuario", new { @class = "btn btn-outline-success" })*@
+                            <a href="@Url.Action( "Formulario", "Usuario")" class="btn btn-outline-warning">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 table-responsive">
+                    @if (Model.Usuarios != null) //Si trajo usuarios
+                    {
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Fecha de Nacimiento</th>
+                                    <th scope="col">Celular</th>
+                                    <th scope="col">Nombre de Usuario</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Sexo</th>
+                                    <th scope="col">Telefono</th>
+                                    <th scope="col">Curp</th>
+                                    <th scope="col">Rol</th>
+                                    <th scope="col">Imagen</th>
+                                    <th scope="col">Dirección</th>
+                                    <th scope="col">Estatus</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (ML.Usuario usuario in Model.Usuarios)
+                                {
+                                    <tr>
+                                        <td>
+
+                                            <a class="btn btn-outline-success" href="@Url.Action("Formulario","Usuario", new {IdUsuario = usuario.IdUsuario })">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                        <td>@usuario.IdUsuario</td>
+                                        <td>@usuario.Nombre @usuario.ApellidoPaterno @usuario.ApellidoMaterno</td>
+                                        <td>@usuario.FechaNacimiento</td>
+                                        <td>@usuario.Celular</td>
+                                        <td>@usuario.UserName</td>
+                                        <td>@usuario.Email</td>
+                                        <td>@usuario.Sexo</td>
+                                        <td>@usuario.Telefono</td>
+                                        <td>@usuario.CURP</td>
+                                        <td>@usuario.Rol.Nombre</td>
+                                        <td>
+                                            @if (usuario.Imagen == null)
+                                            {
+                                                <img id="imgUsuario" src="~/Img/Default.png" height="100px" width="100px" />
+                                            }
+                                            else
+                                            {
+                                                <img id="imgUsuario" src="data:image/png;base64,@Convert.ToBase64String(usuario.Imagen)" height="100px" width="100px" />
+
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (@usuario.Direccion.IdDireccion == 0)
+                                            {
+
+
+                                                <div>No se encontró la dirección del usuario, favor de actulizar sus datos</div>
+
+                                            } @*falta else*@
+
+                                            @usuario.Direccion.Calle Ext. @usuario.Direccion.NumeroExterior Int. @usuario.Direccion.NumeroInterior @usuario.Direccion.Colonia.Nombre C.P @usuario.Direccion.Colonia.CodigoPostal
+                                            @usuario.Direccion.Colonia.Municipio.Nombre @usuario.Direccion.Colonia.Municipio.Estado.Nombre
+
+
+                                        </td>
+                                        <td>
+                                            @if (usuario.Estatus)
+                                            {
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input mt-3" checked="checked" type="checkbox" Id="flexSwitchCheckChecked" onchange="UpdateEstatus(@usuario.IdUsuario)" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input mt-3" type="checkbox" Id="flexSwitchCheckChecked" onchange="UpdateEstatus(@usuario.IdUsuario)" />
+                                                </div>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-danger" href="@Url.Action("Delete","Usuario", new {IdUsuario = usuario.IdUsuario })" method="post">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            Ocurrio un error al traer los datos. Error : @ViewBag.Error
+                        </div>
+                    }
+                </div>
+            </div>
+
+        }
+    </div>
+
+    <div class="container">
+        @using (Html.BeginForm("GetAll", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <div id="cargaMasiva">
+                <div class="row">
+                    @if (Session["RutaTXT"] == null && Session["RutaExcel"] == null)
+                    {
+                        <div class=" col-md-12">
+                            <div class="offset-1 p-3">
+                                @Html.RadioButtonFor(model => model.TipoArchivo, "txt")
+                                TXT
+
+                                @Html.RadioButtonFor(model => model.TipoArchivo, "Excel")
+                                EXCEL
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="row">
+                    <div class="mb-3">
+                        @if (Session["RutaTXT"] == null && Session["RutaExcel"] == null)
+                        {
+                            <input type="file" class="btn btn-outline-secondary" name="archivo" accept=".txt,.xlsx" @*required*@ />
+                        }
+                        <div class="offset-1 col-md-3 p-3">
+                            @if (Session["RutaTXT"] == null && Session["RutaExcel"] == null)
+                            {
+                                <button type="submit" id="showValidar" class="btn btn-outline-secondary">Validar</button>
+                            }
+                            else
+                            {
+
+                                @*@Html.ActionLink("Cargar", "CargaUsuario", "Usuario");*@
+                                <a class="btn btn-outline-success" href="@Url.Action("CargaUsuario","Usuario")"> Cargar </a>
+
+                            }
+                            <a class="btn btn-outline-danger" href="@Url.Action("GetAll","Usuario")"> Cancelar </a>
+                            @*<button type="button" id="cancelarCargar" class="btn btn-outline-danger">Cancelar</button>*@
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row" id="usuariosValidos">
+                    @if (Model.UsuariosCorrectos.Count > 0)
+                    {
+                        <div>
+                            <h3 class="text-center text-bg-secondary"> Usuarios validos: </h3>
+                            <div class="col-12 table-responsive">
+                                @if (Model.UsuariosCorrectos != null) //Si trajo usuarios
+                                {
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Fecha de Nacimiento</th>
+                                                <th scope="col">Celular</th>
+                                                <th scope="col">Nombre de Usuario</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Sexo</th>
+                                                <th scope="col">Telefono</th>
+                                                <th scope="col">Curp</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (ML.Usuario usuario in Model.UsuariosCorrectos)
+                                            {
+                                                <tr>
+                                                    <td>@usuario.Nombre @usuario.ApellidoPaterno @usuario.ApellidoMaterno</td>
+                                                    <td>@usuario.FechaNacimiento</td>
+                                                    <td>@usuario.Celular</td>
+                                                    <td>@usuario.UserName</td>
+                                                    <td>@usuario.Email</td>
+                                                    <td>@usuario.Sexo</td>
+                                                    <td>@usuario.Telefono</td>
+                                                    <td>@usuario.CURP</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        Ocurrio un error al traer los datos. Error : @ViewBag.Error
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="row" id="usuariosInvalidos">
+
+                    @if (Model.UsuariosIncorrectos.Count > 0)
+                    {
+                        <div>
+                            <h3 class="text-center text-bg-danger"> Usuarios Invalidos: </h3>
+                            <div class="col-12 table-responsive">
+                                @if (Model.UsuariosIncorrectos != null) //Si trajo usuariosInvalidos
+                                {
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Fecha de Nacimiento</th>
+                                                <th scope="col">Celular</th>
+                                                <th scope="col">Nombre de Usuario</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Sexo</th>
+                                                <th scope="col">Telefono</th>
+                                                <th scope="col">Curp</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (ML.Usuario usuario in Model.UsuariosIncorrectos)
+                                            {
+                                                <tr>
+                                                    <td>@usuario.Nombre @usuario.ApellidoPaterno @usuario.ApellidoMaterno</td>
+                                                    <td>@usuario.FechaNacimiento</td>
+                                                    <td>@usuario.Celular</td>
+                                                    <td>@usuario.UserName</td>
+                                                    <td>@usuario.Email</td>
+                                                    <td>@usuario.Sexo</td>
+                                                    <td>@usuario.Telefono</td>
+                                                    <td>@usuario.CURP</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        Ocurrio un error al traer los datos. Error : @ViewBag.Error
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+
+
+            <div id="busquedaAbierta">
+                <h2> Busqueda Abierta</h2>
+                <div class="row">
+                    <div class="col-3 p-3">
+                        @*@Html.LabelFor(model => model.Nombre)*@
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+                    </div>
+                    <div class="col-3 p-3">
+                        @*@Html.LabelFor(model => model.ApellidoPaterno)*@
+                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @placeholder = "Apellido Paterno" })
+                    </div>
+                    <div class="col-3 p-3">
+                        @*@Html.LabelFor(model => model.ApellidoMaterno)*@
+                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @placeholder = "Apellido Materno" })
+                    </div>
+                    <div class="col-3 p-3">
+                        <button type="submit" class="btn btn-outline-secondary">Buscar</button>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+
+
+</div>
+
+<script src="~/Scripts/jquery-3.7.0.js"></script> @*incluir jqerry*@
+<script>
+    $(document).ready(function () {
+        ;
+        $('#cargaMasiva').hide();
+        $('#busquedaAbierta').hide();
+
+        $("#showCargaMasiva").click(function () {
+            $('#cargaMasiva').show(3000);
+            $('#busquedaAbierta').hide("slow");
+            $('#viewGetAll').hide("slow");
+            //$('#usuariosValidos').hide("slow");
+            //$('#usuariosInvalidos').hide("slow");
+
+            $("#showValidar").click(function () {
+                $('#usuariosValidos').show("slow");
+                $('#usuariosInvalidos').show("slow");
+
+            });
+
+        });
+        $("#showBusquedaAbierta").click(function () {
+            $('#busquedaAbierta').show(3000);
+            $('#cargaMasiva').hide("fast");
+            $('#viewGetAll').hide("slow");
+
+        });
+
+        $("#cancelarCargar").click(function () {
+            $('#viewGetAll').show("slow");
+            $('#cargaMasiva').hide("slow");
+            $('#busquedaAbierta').hide("slow");
+        });
+    });
+
+    //- Si es un id –> $(#nombre del id)
+    //– Si es una clase –> $(.nombre de la clase)
+    //– Si es etiqueta –> $(nombre de la etiqueta)
+
+</script>
+<script>
+    function UpdateEstatus(idUsuario){
+  $.ajax({
+          type: 'GET',
+          url: '@Url.Action("UpdateEstatus")',
+          dataType: 'json',
+          data: { IdUsuario: idUsuario},
+          success: function (result)
+          {
+              if (result) {
+                  alert("El estatus del usuario ha cambiado");
+              }
+          },
+          error: function (ex)
+          {
+              alert('failed.'+ ex);
+          }
+  });
+
+}
+</script>
+

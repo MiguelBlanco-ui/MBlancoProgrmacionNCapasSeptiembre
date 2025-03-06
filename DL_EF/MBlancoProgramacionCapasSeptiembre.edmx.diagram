@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="da8ba2f2cc88451386566cb35e4033b3" Name="Diagram1" ZoomLevel="76">
+        <EntityTypeShape EntityType="MBlancoProgramacionCapasSeptiembreModel.Colonia" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="MBlancoProgramacionCapasSeptiembreModel.Direccion" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="MBlancoProgramacionCapasSeptiembreModel.Estado" Width="1.5" PointX="1.5" PointY="10.125" />
+        <EntityTypeShape EntityType="MBlancoProgramacionCapasSeptiembreModel.Municipio" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="MBlancoProgramacionCapasSeptiembreModel.Pai" Width="1.5" PointX="1.5" PointY="13.25" />
+        <EntityTypeShape EntityType="MBlancoProgramacionCapasSeptiembreModel.Rol" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="MBlancoProgramacionCapasSeptiembreModel.Usuario" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="MBlancoProgramacionCapasSeptiembreModel.FK__Colonia__IdMunic__0E6E26BF" />
+        <AssociationConnector Association="MBlancoProgramacionCapasSeptiembreModel.FK__Direccion__IdCol__114A936A" />
+        <AssociationConnector Association="MBlancoProgramacionCapasSeptiembreModel.FK_Direccion_IdUsuario" />
+        <AssociationConnector Association="MBlancoProgramacionCapasSeptiembreModel.FK__Estado__IdPais__08B54D69" />
+        <AssociationConnector Association="MBlancoProgramacionCapasSeptiembreModel.FK__Municipio__IdEst__0B91BA14" />
+        <AssociationConnector Association="MBlancoProgramacionCapasSeptiembreModel.fk_IdRol" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
